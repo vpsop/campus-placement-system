@@ -11,15 +11,16 @@ import signIn from "@/firebase/login";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/authContext";
-import React from "react";
+import React, {useTransition} from "react";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 
 export default function LoginPage() {
 
+	const [isPending, startTransition] = useTransition();
 	const user = useAuthContext();
 	const router = useRouter();
 
-	console.log(user);
 	React.useEffect(() => {
 		// If user is logged in redirect to the home page 
 		if (user.authUser !== null) router.push("/");
@@ -37,11 +38,14 @@ export default function LoginPage() {
 
 
 	function onSubmit(data: z.infer<typeof LoginSchema>) {
-		try {
-			signIn(data.email, data.password);
-		} catch (err) {
-			console.log(err);
-		}
+		startTransition(async () => {
+			try {
+				console.log(isPending);
+				await signIn(data.email, data.password);
+			} catch (err) {
+				console.log(err);
+			}
+		})
 	}
 
 
@@ -63,7 +67,7 @@ export default function LoginPage() {
 									<FormControl>
 										<Input
 											{...field}
-											// disabled={isPending}
+											disabled={isPending}
 											placeholder="Your Email"
 											type="email"
 										/>
@@ -82,7 +86,7 @@ export default function LoginPage() {
 									<FormControl>
 										<Input
 											{...field}
-											// disabled={isPending}
+											disabled={isPending}
 											placeholder="Your password"
 											type="password"
 										/>
@@ -95,8 +99,9 @@ export default function LoginPage() {
 						<Button
 							type="submit"
 							className="w-full"
+							disabled={isPending}
 						>
-							Login
+							{isPending ? <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> : <span>Log in</span>}
 						</Button>
 					</div>
 				</form>
