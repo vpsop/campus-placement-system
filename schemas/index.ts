@@ -23,3 +23,14 @@ export const SignUpSchema = z.object({
     }),
     course: z.enum(COURSES)
 });
+
+
+export const AddCompanySchema = z.object({
+    name: z.string().min(2, {
+        message: "Name is required"
+    }),
+    description: z.string().min(100, {
+        message: "Description is required"
+    })
+});
+
