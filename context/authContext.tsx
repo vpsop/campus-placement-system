@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext } from 'react';
-import useFirebaseAuth from '@/firebase/auth';
+import useFirebaseAuth from '@/firebase/auth/auth';
 import { User } from 'firebase/auth';
 
 

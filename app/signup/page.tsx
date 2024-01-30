@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
-import signUp from "@/firebase/signup";
+import signUp from "@/firebase/auth/signup";
 import Link from "next/link";
 import React from "react";
 import { useAuthContext } from "@/context/authContext";

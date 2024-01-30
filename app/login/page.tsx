@@ -7,11 +7,11 @@ import { LoginSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import signIn from "@/firebase/login";
+import signIn from "@/firebase/auth/login";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/authContext";
-import React, {useTransition} from "react";
+import React, { useTransition } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 
 
@@ -25,8 +25,8 @@ export default function LoginPage() {
 		// If user is logged in redirect to the home page 
 		if (user.authUser !== null) router.push("/");
 	}, [user, router]);
-	
-	
+
+
 
 	const form = useForm<z.infer<typeof LoginSchema>>({
 		resolver: zodResolver(LoginSchema),
@@ -40,12 +40,11 @@ export default function LoginPage() {
 	function onSubmit(data: z.infer<typeof LoginSchema>) {
 		startTransition(async () => {
 			try {
-				console.log(isPending);
 				await signIn(data.email, data.password);
 			} catch (err) {
 				console.log(err);
 			}
-		})
+		});
 	}
 
 

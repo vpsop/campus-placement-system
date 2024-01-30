@@ -7,6 +7,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useTransition } from "react";
 import DashboardSidebarItem from "./DashboardSidebarItem";
+import { getAuth } from "firebase/auth";
+import firebaseApp from "@/firebase/config";
 
 interface AdminDashboardProps {
     children: React.ReactNode;
@@ -25,7 +27,7 @@ export default function AdminDashboardWrapper({ children }: AdminDashboardProps)
 
     return (
         <main className="min-h-screen flex">
-            <div className="w-64 border-r border-gray-200 flex flex-col items-center pt-8 gap-y-16">
+            <div className="w-64 border-r border-gray-200 flex flex-col items-center pt-8 gap-y-16 shrink-0">
                 <p className="font-bold text-xl">Admin Panel</p>
                 <div className="flex flex-col gap-6 text-center w-full">
                     <DashboardSidebarItem href="/admin/create-opening">Create Opening</DashboardSidebarItem>
@@ -43,7 +45,7 @@ export default function AdminDashboardWrapper({ children }: AdminDashboardProps)
                         <li>About Us</li>
                     </ul>
                     <div className="profile-btn h-10 w-10 aspect-square rounded-full overflow-hidden">
-                        <Avatar>
+                        <Avatar onClick={() => getAuth(firebaseApp).signOut()}>
                             <AvatarImage src="https://github.com/shadcn.png" />
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
@@ -52,7 +54,7 @@ export default function AdminDashboardWrapper({ children }: AdminDashboardProps)
 
 
                 {/* Display inside the data area */}
-                <div className="h-[100%-80px] w-full">{children}</div>
+                <div className="h-[calc(100%-80px)] w-full">{children}</div>
             </div>
         </main>
     );
