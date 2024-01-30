@@ -20,10 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className} suppressHydrationWarning={true}>
-      <FirebaseAppProvider firebaseConfig={FIREBASE_CONFIG}>
-    {children}
-  </FirebaseAppProvider>
+      <body className={inter.className + ""} suppressHydrationWarning={true}>
+        <AuthUserProvider>
+          {children}
+        </AuthUserProvider>
       </body>
     </html>
   );

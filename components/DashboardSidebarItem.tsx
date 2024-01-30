@@ -12,8 +12,8 @@ export default function DashboardSidebarItem({href, children}: DashboardSidebarI
   return (
     <Link href={href} className={
       cn(
-          "px-4 py-[10px] mx-2",
-          currentRoute === href ? "bg-blue-600 text-white rounded-full" : ""
+          "px-4 py-[10px] flex items-center gap-4",
+          currentRoute === href ? "bg-blue-300 text-white border-r-4 border-blue-600" : ""
       )
   }>{children}</Link>
   );

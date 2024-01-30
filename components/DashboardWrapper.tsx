@@ -2,6 +2,7 @@
 
 import { useAuthContext } from "@/context/authContext";
 import { cn } from "@/lib/utils";
+import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -27,10 +28,10 @@ export default function AdminDashboardWrapper({ children }: AdminDashboardProps)
 
     return (
         <main className="min-h-screen flex">
-            <div className="w-64 border-r border-gray-200 flex flex-col items-center pt-8 gap-y-16 shrink-0">
+            <div className=" w-56 border-r border-gray-200 flex flex-col items-center pt-8 gap-y-16 shrink-0">
                 <p className="font-bold text-xl">Admin Panel</p>
-                <div className="flex flex-col gap-6 text-center w-full">
-                    <DashboardSidebarItem href="/admin/create-opening">Create Opening</DashboardSidebarItem>
+                <div className="flex flex-col gap-6 text-start w-full text-sm">
+                    <DashboardSidebarItem href="/admin/create-opening"><PlusCircledIcon/> <span>Create Opening</span></DashboardSidebarItem>
                     <DashboardSidebarItem href="/admin/display-openings">Display Openings</DashboardSidebarItem>
                     <DashboardSidebarItem href="/admin/add-company">Add Company</DashboardSidebarItem>
                     <DashboardSidebarItem href="/admin/display-companies">Display Companies</DashboardSidebarItem>

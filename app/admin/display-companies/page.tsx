@@ -44,7 +44,7 @@ export default function DisplayCompanies() {
 
   return (
     <div className="flex items-center justify-center w-full">
-      <Table className="max-width-full border rounded-md px-20">
+      <Table className="border max-w-full rounded-md px-20">
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
